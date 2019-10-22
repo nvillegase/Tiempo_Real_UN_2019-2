@@ -1,2 +1,7 @@
-# Tiempo_Real_UN_2019-2
-Repositorio para los proyectos de la asignatura Sistemas en Tiempo Real
+# Sistemas en Tiempo Real
+## Universidad Nacional de Colombia - Sede Medellín
+## Semestre 2019-2
+
+Integrantes:
+- Nicolás Villegas Echavarría
+- Juan Camilo Ruiz Escobar
