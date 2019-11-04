@@ -9,20 +9,12 @@ Integrantes:
 
 ### Instrucciones
 
-En primer lugar deben compilarse los diferentes archivos que componen el programa en archivos objeto, de la siguiente forma:
-
-```shell
-gcc -c <lista de archivos .c separados por espacio>
+Para ejecutar el código del proyecto, primero se debe correr (desde la carpeta del proyecto) el `Makefile` con el comando
 ```
-
-Lo cual produce una series de archivos con la extensión `.o` uno por cada archivo `.c` que fue compilado. Cabe anotar que no es necesario incluir los archivos de cabecera (`.h`) en esta instrucción, ya que los mismos son llamados indirectamente por los archivos `.c` que hace uso de ellos. Luego, los archivos `.o` archivos deben de ser enlazados, mediante la siguiente instrucción:
-
+make
 ```
-gcc <lista de archivos .o separados por espacio> -o <ejecutable>
+Esto generará un archivo binario `main`. Para ejecutarlo, escribir en la terminal:
 ```
-
-en donde `<ejecutable>` es el nombre deseado para el archivo ejecutable de salida. Finalmente, para ejecutar el programa, basta con escribir en la línea de comandos:
-
+./main
 ```
-./<ejecutable>
-```
+Listo.
