@@ -9,21 +9,22 @@
 
 void sensorActividadCardiaca(void) {
 
-    double start_t, delta_t, BPM;
+    double t_inicio, delta_t, BPM;
     double frecBPM[TOTAL_MUESTRAS];
     int indice = 0;
 
+    printf("Presione la tecla ENTER para simular los latidos del corazón...\n");
+
     while (1) {
 
-        start_t = tiempoSegundos();
+        t_inicio = tiempoSegundos();
         getchar();
-        delta_t = (tiempoSegundos() - start_t);
+        delta_t = (tiempoSegundos() - t_inicio);
         BPM = 60 / delta_t; // Latidos por minuto
         frecBPM[indice++ % TOTAL_MUESTRAS] = BPM;
 
         if (indice > 5) {
-            double f_prom = analizarFrecuenciaCardiaca(frecBPM, TOTAL_MUESTRAS);
-            printf("%d. Frecuencia cardiaca promedio: %.1f BPM", indice, f_prom);
+            analizarFrecuenciaCardiaca(frecBPM, TOTAL_MUESTRAS);
         }
         else {
             printf("Recopilando datos iniciales... (%d/5)", indice);
@@ -38,9 +39,13 @@ void sensorActividadCardiaca(void) {
 double analizarFrecuenciaCardiaca(double *arr, int n) {
 
     double frecPromedio = promedioArreglo(arr, n);
+    printf("Frecuencia cardiaca promedio: %.1f BPM", frecPromedio);
 
     if (frecPromedio < FREC_NORMAL) {
-        printf("¡Frecuencia cardiaca por debajo de lo normal!");
+        printf("\t ¡Aviso! Frecuencia cardiaca por debajo de lo normal");
+    }
+    else if (frecPromedio >= FREC_NORMAL) {
+        printf("\t Frecuencia cardiaca en el rango normal...");
     }
 
     return frecPromedio;
@@ -57,7 +62,7 @@ double analizarFrecuenciaCardiaca(double *arr, int n) {
 double tiempoSegundos(void) {
 
     struct timeval tv;
-    gettimeofday(&tv,NULL);
+    gettimeofday(&tv, NULL);
     return (double) tv.tv_sec + tv.tv_usec/1e6;
 
 }
