@@ -23,7 +23,10 @@ void sensorActividadCardiaca(void) {
 
         if (indice > 5) {
             double f_prom = analizarFrecuenciaCardiaca(frecBPM, TOTAL_MUESTRAS);
-            printf("%d. Frecuencia cardiaca promedio: %.1f BPM\n", indice, f_prom);
+            printf("%d. Frecuencia cardiaca promedio: %.1f BPM", indice, f_prom);
+        }
+        else {
+            printf("Recopilando datos iniciales... (%d/5)", indice);
         }
 
     }
