@@ -16,7 +16,7 @@ void sensorActividadCardiaca(void) {
     int indice = 0;
     short descarga;
 
-    printf("Presione la tecla ENTER para simular los latidos del corazón...\n");
+    printf("Presione la tecla 'q' para salir, y cualquier tecla para simular los latidos del corazón...\n");
 
     while (1) {
 
