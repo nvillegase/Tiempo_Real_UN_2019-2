@@ -9,5 +9,6 @@ double tiempoSegundos(void);
 double analizarFrecuenciaCardiaca(double*, int);
 void sensorActividadCardiaca(void);
 void descargaElectrica(void);
+void monitorearBateria(double);
 
 #endif

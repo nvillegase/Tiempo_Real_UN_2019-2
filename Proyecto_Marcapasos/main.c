@@ -3,6 +3,7 @@
 int main(void) {
 
     sensorActividadCardiaca();
+    monitorearBateria();
     return 0;
     
 }

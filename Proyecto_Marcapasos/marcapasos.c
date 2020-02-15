@@ -30,6 +30,7 @@ void sensorActividadCardiaca(void) {
                 break;
             }
         }
+        monitorearBateria(tiempoSegundos() - t_inicio);
 
         if (descarga == 0) {
             char c = getchar();
@@ -76,6 +77,20 @@ double analizarFrecuenciaCardiaca(double *arr, int n) {
 
 void descargaElectrica(void) {
     printf("¡¡¡ Actividad cardiaca crítica, descarga eléctrica !!!\n");
+}
+
+
+void monitorearBateria(double t) {
+    if (t > 180.0) {
+        printf("Aviso: batería baja (%d%%)\n", (int)(50 - (t - 180) / 6));
+    }
+    else if (400.0 < t && t < 480.0) {
+        printf("¡¡¡AVISO: ESTADO CRÍTICO DE LA BATERÍA!!! (%d%%)\n", (int)(50 - (t - 180) / 6));
+    }
+    else if (t > 480.0) {
+        printf("Batería descargada x_x'\n");
+        while (1) {}
+    }
 }
 
 
