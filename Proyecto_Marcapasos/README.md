@@ -3,8 +3,6 @@
 
 Integrantes:
 - Nicolás Villegas Echavarría
-- Juan Camilo Ruiz Escobar
-
 
 ### Instrucciones
 

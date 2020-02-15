@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <sys/time.h>
 
+#include "lib/kbhit.h"
 #include "marcapasos.h"
 
-#define TOTAL_MUESTRAS 3
-#define FREC_NORMAL 60
+#define TOTAL_MUESTRAS 5
+#define FREC_NORMAL_BAJO 60
+#define FREC_NORMAL_ALTO 100
 
 
 void sensorActividadCardiaca(void) {
@@ -12,13 +14,28 @@ void sensorActividadCardiaca(void) {
     double t_inicio, delta_t, BPM;
     double frecBPM[TOTAL_MUESTRAS];
     int indice = 0;
+    short descarga;
 
     printf("Presione la tecla ENTER para simular los latidos del corazón...\n");
 
     while (1) {
 
         t_inicio = tiempoSegundos();
-        getchar();
+        descarga = 0;
+        
+        while(!kbhit()) {
+            if (tiempoSegundos() - t_inicio > 1.5) {
+                descargaElectrica();
+                descarga = 1;
+                break;
+            }
+        }
+
+        if (descarga == 0) {
+            char c = getchar();
+            if (c == 'q') break;
+        }
+
         delta_t = (tiempoSegundos() - t_inicio);
         BPM = 60 / delta_t; // Latidos por minuto
         frecBPM[indice++ % TOTAL_MUESTRAS] = BPM;
@@ -27,7 +44,7 @@ void sensorActividadCardiaca(void) {
             analizarFrecuenciaCardiaca(frecBPM, TOTAL_MUESTRAS);
         }
         else {
-            printf("Recopilando datos iniciales... (%d/5)", indice);
+            printf("Recopilando datos ... (%d/%d)\n", indice, TOTAL_MUESTRAS);
         }
 
     }
@@ -36,20 +53,29 @@ void sensorActividadCardiaca(void) {
 
 }
 
+
 double analizarFrecuenciaCardiaca(double *arr, int n) {
 
     double frecPromedio = promedioArreglo(arr, n);
     printf("Frecuencia cardiaca promedio: %.1f BPM", frecPromedio);
 
-    if (frecPromedio < FREC_NORMAL) {
-        printf("\t ¡Aviso! Frecuencia cardiaca por debajo de lo normal");
+    if (frecPromedio < FREC_NORMAL_BAJO) {
+        printf("\t ¡Aviso! Frecuencia cardiaca por debajo de lo normal\n");
     }
-    else if (frecPromedio >= FREC_NORMAL) {
-        printf("\t Frecuencia cardiaca en el rango normal...");
+    else if (FREC_NORMAL_BAJO <= frecPromedio && frecPromedio <= FREC_NORMAL_ALTO) {
+        printf("\t Frecuencia cardiaca en el rango normal...\n");
+    }
+    else {
+        printf("\t ¡Aviso! Frecuencia cardiaca por encima de lo normal\n");
     }
 
     return frecPromedio;
     
+}
+
+
+void descargaElectrica(void) {
+    printf("¡¡¡ Actividad cardiaca crítica, descarga eléctrica !!!\n");
 }
 
 

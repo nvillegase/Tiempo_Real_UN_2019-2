@@ -8,5 +8,6 @@ double tiempoSegundos(void);
 // Funciones del problema:
 double analizarFrecuenciaCardiaca(double*, int);
 void sensorActividadCardiaca(void);
+void descargaElectrica(void);
 
 #endif
