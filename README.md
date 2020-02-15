@@ -2,9 +2,8 @@
 ## Universidad Nacional de Colombia - Sede Medellín
 ## Semestre 2019-2
 
-Integrantes:
+Por:
 - Nicolás Villegas Echavarría
-- Juan Camilo Ruiz Escobar
 
 
 Repositorio para los proyectos de la asignatura 'Sistemas en Tiempo Real'.
