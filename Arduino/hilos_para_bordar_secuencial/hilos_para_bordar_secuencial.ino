@@ -4,7 +4,7 @@
 #define LED2 32
 #define LED3 34
 
-int periodo_ms;
+int medio_periodo_ms;
 led led1(LED1);
 led led2(LED2);
 led led3(LED3);
@@ -15,8 +15,8 @@ void setup() {
     Serial.print("Seleccione el periodo (milisegundos):\t");
     while (!Serial.available()) {}
 
-    periodo_ms = (int) Serial.parseFloat();
-    Serial.print(periodo_ms);
+    medio_periodo_ms = (int) Serial.parseFloat();
+    Serial.print(medio_periodo_ms);
     Serial.println(" ms.");
 
     for (int i = 0; i < 3; ++i) {
@@ -34,18 +34,17 @@ void loop() {
                     timer_led_2 = 0, 
                     timer_led_3 = 0;
     
-    if (millis() - timer_led_1 >= periodo_ms) {
+    if (millis() - timer_led_1 >= medio_periodo_ms) {
         timer_led_1 = millis();
         led1.toggle();
     }
-    if (millis() - timer_led_2 >= 0.5*periodo_ms) {
+    if (millis() - timer_led_2 >= 0.5*medio_periodo_ms) {
         timer_led_2 = millis();
         led2.toggle();
     }
-    if (millis() - timer_led_3 >= 0.25*periodo_ms) {
+    if (millis() - timer_led_3 >= 0.25*medio_periodo_ms) {
         timer_led_3 = millis();
         led3.toggle();
     }
 
 }
-

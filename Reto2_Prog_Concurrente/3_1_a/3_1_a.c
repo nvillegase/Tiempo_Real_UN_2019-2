@@ -6,7 +6,7 @@
 #include <time.h>
 
 #define MAX_COUNT 10
-#define BUF_SIZE 60
+#define BUF_SIZE 120
 
 void main(void) {
     pid_t pid;
@@ -19,7 +19,6 @@ void main(void) {
     for (i = 1; i <= MAX_COUNT; i++) {
         x = rand();
         sprintf(buf, "Esta línea es de pid %d, valor = %d, valor de x es %d\n", pid, i, x);
-        write(i, buf, strlen(buf));
+        write(1, buf, strlen(buf));
     }
 }
-
