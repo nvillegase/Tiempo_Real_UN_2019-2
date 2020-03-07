@@ -1,16 +1,11 @@
 #include <Arduino_FreeRTOS.h>
 #include <semphr.h>
-#include "led.h"
-
-#define LED1 30
-#define LED2 32
-#define LED3 34
 
 int medio_periodo_ms;
 
 void setup() {
   
-    Serial.begin(9600);
+    Serial.begin(115200);
     Serial.print("Seleccione el periodo (milisegundos):\t");
     while (!Serial.available()) {}
 
@@ -25,9 +20,9 @@ void setup() {
         delay(1000);
     }
     
-    xTaskCreate(TareaA, "TareaA", 128, NULL, 0, NULL);
-    xTaskCreate(TareaB, "TareaB", 128, NULL, 0, NULL);
-    xTaskCreate(TareaC, "TareaC", 128, NULL, 0,NULL);
+    xTaskCreate(TareaA, "TareaA", 128, NULL, 1, NULL);
+    xTaskCreate(TareaB, "TareaB", 128, NULL, 1, NULL);
+    xTaskCreate(TareaC, "TareaC", 128, NULL, 1,NULL);
 
     vTaskStartScheduler();
     
@@ -35,34 +30,42 @@ void setup() {
 
 static void TareaA(void* params) {
 
-    led led1(LED1);
     int t = medio_periodo_ms;
+    static float voltaje;
     
     while(true) { 
-        led1.toggle();
+        int lectura = analogRead(A0);
+        voltaje = 5 * (float) lectura / 1023.0;
+        Serial.print("Voltaje potenciómetro 1: ");
+        Serial.println(voltaje, 3);
         vTaskDelay(t / portTICK_PERIOD_MS);
     }
 }
 
 static void TareaB(void* params) {
 
-    
-    led led2(LED2);
     int t = medio_periodo_ms / 2;
-      
-    while(true) {
-        led2.toggle();
+    static float voltaje;
+    
+    while(true) { 
+        int lectura = analogRead(A1);
+        voltaje = 5 * (float) lectura / 1023.0;
+        Serial.print("Voltaje potenciómetro 2: ");
+        Serial.println(voltaje, 3);
         vTaskDelay(t / portTICK_PERIOD_MS);
     }
 }
 
 static void TareaC(void* params) {
 
-    led led3(LED3);
     int t = medio_periodo_ms / 4;
+    static float temperatura;
     
-    while(true) {
-        led3.toggle();
+    while(true) { 
+        int lectura = analogRead(A2);
+        temperatura = map(lectura, 176, 9, 27, 200); 
+        Serial.print("Temperatura sensor 3: ");
+        Serial.println(temperatura);
         vTaskDelay(t / portTICK_PERIOD_MS);
     }
 }
