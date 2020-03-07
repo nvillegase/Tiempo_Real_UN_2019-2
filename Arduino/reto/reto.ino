@@ -5,7 +5,7 @@ int medio_periodo_ms;
 
 void setup() {
   
-    Serial.begin(115200);
+    Serial.begin(9600);
     Serial.print("Seleccione el periodo (milisegundos):\t");
     while (!Serial.available()) {}
 

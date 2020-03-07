@@ -25,9 +25,9 @@ void setup() {
         delay(1000);
     }
     
-    xTaskCreate(TareaA, "TareaA", 128, NULL, 0, NULL);
-    xTaskCreate(TareaB, "TareaB", 128, NULL, 0, NULL);
-    xTaskCreate(TareaC, "TareaC", 128, NULL, 0,NULL);
+    xTaskCreate(TareaA, "TareaA", 128, NULL, 1, NULL);
+    xTaskCreate(TareaB, "TareaB", 128, NULL, 2, NULL);
+    xTaskCreate(TareaC, "TareaC", 128, NULL, 3,NULL);
 
     vTaskStartScheduler();
     
